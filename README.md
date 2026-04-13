@@ -10,13 +10,13 @@ This project follows a layered architecture:
 
 
 [ Next.js Frontend ]
-↓
+        ↓
 [ FastAPI API Layer (Controllers) ]
-↓
+        ↓
 [ Service Layer (Business Logic) ]
-↓
+        ↓
 [ Repository Layer (Data Access) ]
-↓
+        ↓
 [ Database (SQLite) ]
 
 
@@ -24,13 +24,13 @@ This project follows a layered architecture:
 
 
 backend/app/
-├── api/ # Route handlers (controllers)
-├── services/ # Business logic
-├── repositories/ # Data access layer
-├── models/ # SQLAlchemy ORM models
-├── schemas/ # Pydantic DTOs
-├── db/ # Database setup
-└── core/ # Config, security (future)
+├─ api/ # Route handlers (controllers)
+├─ services/ # Business logic
+├─ repositories/ # Data access layer
+├─ models/ # SQLAlchemy ORM models
+├─ schemas/ # Pydantic DTOs
+├─ db/ # Database setup
+└─ core/ # Config, security (future)
 
 
 ---
