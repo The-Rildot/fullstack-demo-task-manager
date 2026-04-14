@@ -1,13 +1,12 @@
 # Fullstack Demo Task Manager
 
-A modern full-stack task management application designed to demonstrate clean architecture, separation of concerns, and scalable design patterns.
+A modern full-stack task management application demonstrating clean architecture, separation of concerns, and scalable design patterns across both frontend and backend systems.
 
 ---
 
 ## Architecture Overview
 
 This project follows a layered architecture:
-
 
 [ Next.js Frontend ]
         ↓
@@ -19,8 +18,47 @@ This project follows a layered architecture:
         ↓
 [ Database (SQLite) ]
 
+---
 
-### Backend Structure
+## Tech Stack
+
+### Backend
+- FastAPI
+- SQLAlchemy
+- Pydantic
+- JWT Authentication (python-jose, passlib)
+
+### Frontend
+- Next.js (App Router)
+- TypeScript
+- Axios
+- Tailwind CSS
+
+---
+
+## Features
+
+### Authentication
+- User registration
+- Login with JWT
+- Protected routes (client-side)
+
+### Task Management
+- Create tasks
+- View tasks
+- Update tasks (title + completion toggle)
+- Delete tasks
+
+### UI/UX
+- Clean component-based UI
+- Inline task editing
+- Loading states and basic validation
+
+---
+
+## Project Structure
+
+### Backend
 
 
 backend/app/
@@ -30,86 +68,161 @@ backend/app/
 ├─ models/ # SQLAlchemy ORM models
 ├─ schemas/ # Pydantic DTOs
 ├─ db/ # Database setup
-└─ core/ # Config, security
+└─ core/ # Config, security (JWT, hashing)
 
 
 ---
 
-## Tech Stack
-
-### Backend
-- :contentReference[oaicite:0]{index=0}
-- SQLAlchemy (ORM)
-- Pydantic (validation & DTOs)
-
 ### Frontend
-- :contentReference[oaicite:1]{index=1} (App Router)
-- TypeScript
-- Axios (API client)
+
+
+frontend/src/
+├─ app/ # Next.js App Router pages
+│ ├─ login/
+│ ├─ register/
+│ └─ tasks/
+├─ components/ # Reusable UI components
+├─ features/
+│ ├─ auth/
+│ └─ tasks/
+├─ services/ # API client layer
+└─ hooks/ # Custom hooks (optional)
+
 
 ---
 
 ## Design Patterns Used
 
-### 1. Repository Pattern
-Encapsulates all database operations and isolates persistence logic.
+### Repository Pattern
+Encapsulates database operations and isolates persistence logic.
 
-### 2. Service Layer
-Contains business logic and orchestrates repository usage.
+### Service Layer
+Handles business logic and orchestrates repository calls.
 
-### 3. Dependency Injection
-Implemented using FastAPI's `Depends` system for loose coupling.
+### Dependency Injection
+Implemented using FastAPI's `Depends` for loose coupling.
 
-### 4. DTO Pattern (Schemas)
-Separates internal database models from external API contracts.
+### DTO Pattern (Schemas)
+Separates internal database models from API contracts.
 
----
-
-## Key Design Decisions
-
-### Why FastAPI?
-- High performance
-- Native dependency injection
-- Strong typing with Pydantic
-
-### Why Next.js?
-- Hybrid rendering support
-- Clean project structure
-- Strong ecosystem
-
-### Why SQLite (initially)?
-- Fast setup for development
-- No external dependencies
+### Frontend Service Layer
+Abstracts API calls away from UI components.
 
 ---
 
-## Tradeoffs
+## API Examples
 
-| Decision        | Tradeoff |
-|----------------|---------|
-| SQLite         | Not production-scalable |
-| No auth (Day 1)| Simplicity over completeness |
-| Minimal UI     | Focus on architecture |
+### Register User
 
----
 
-## Features (Planned)
+POST /users
 
-- User authentication (JWT)
-- Task CRUD operations
-- Task filtering (completed / active)
-- Responsive UI
 
----
+```json
+{
+  "email": "test@example.com",
+  "password": "password123"
+}
+Login
+POST /auth/login
+
+Response:
+
+{
+  "access_token": "...",
+  "token_type": "bearer"
+}
+Create Task
+POST /tasks
+Authorization: Bearer <token>
+{
+  "title": "New Task"
+}
+Update Task
+PUT /tasks/{id}
+{
+  "title": "Updated Task",
+  "completed": true
+}
+Delete Task
+DELETE /tasks/{id}
 
 ## How to Run
-
-### Backend
-
-```bash
+1. Backend
 cd backend
+
 python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
+.venv\Scripts\activate  # Windows
 
 pip install -r requirements.txt
+
 uvicorn app.main:app --reload
+
+Backend runs on:
+
+http://127.0.0.1:8000
+
+Docs:
+
+http://127.0.0.1:8000/docs
+
+2. Frontend
+cd frontend
+
+npm install
+npm run dev
+
+Frontend runs on:
+
+http://localhost:3000
+
+## Key Design Decisions
+### Why FastAPI?
+- High performance
+- Built-in dependency injection
+- Strong typing via Pydantic
+### Why Next.js?
+- File-based routing
+- Modern React patterns (App Router)
+- Strong developer experience
+### Why SQLite?
+- Zero setup
+- Ideal for local development and demos
+
+This project demonstrates:
+
+Clean backend architecture (layered + DI)
+Structured frontend with separation of concerns
+Full JWT authentication flow
+Complete CRUD functionality
+
+---
+
+## 3 High-Impact Optional Additions
+
+## 1. Add Screenshots (very strong signal)
+
+Example:
+
+```md
+## UI Preview
+
+### Login Page
+![Login Page](./screenshots/Login-Page.png)
+
+### Tasks Page
+![Tasks Page](./screenshots/Tasks-Page.png)
+
+## Demo
+
+![Demo](./screenshots/Github-Fullstack-Demo-Gif.gif)
+
+Shows:
+
+login → create task → edit → delete
+
+## What I Would Improve With More Time
+
+- Server-side auth protection (middleware)
+- Optimistic UI updates
+- Test coverage (backend + frontend)

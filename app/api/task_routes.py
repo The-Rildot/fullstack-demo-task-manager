@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from app.schemas.task import TaskCreate, TaskRead
+from app.schemas.task import TaskCreate, TaskRead, TaskUpdate
 from app.services.task_service import TaskService
 from app.repositories.task_repository import TaskRepository
 from app.db.deps import get_db
@@ -29,3 +29,23 @@ def get_tasks(
     current_user = Depends(get_current_user)
 ):
     return service.get_tasks(db, user_id=current_user.id)
+
+@router.put("/{task_id}", response_model=TaskUpdate)
+def update_task(
+    task_id: int, 
+    updated: TaskUpdate, 
+    db: Session = Depends(get_db),
+    current_user = Depends(get_current_user),
+    service: TaskService = Depends(get_task_service)
+):
+    return service.update_task(db, task_id, updated, user_id=current_user.id)
+
+@router.delete("/{task_id}")
+def delete_task(
+    task_id: int, 
+    db: Session = Depends(get_db), 
+    current_user = Depends(get_current_user), 
+    service: TaskService = Depends(get_task_service)
+):
+    service.delete_task(db, task_id, user_id=current_user.id)
+    return {"message": "Task deleted"}
