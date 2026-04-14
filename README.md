@@ -133,6 +133,7 @@ DELETE /tasks/{id}
 
 ## How to Run
 1. Backend
+```
 cd backend
 
 python -m venv .venv
@@ -149,8 +150,10 @@ http://127.0.0.1:8000
 Docs:
 
 http://127.0.0.1:8000/docs
+```
 
 2. Frontend
+```
 cd frontend
 
 npm install
@@ -159,6 +162,7 @@ npm run dev
 Frontend runs on:
 
 http://localhost:3000
+```
 
 ## Key Design Decisions
 ### Why FastAPI?
