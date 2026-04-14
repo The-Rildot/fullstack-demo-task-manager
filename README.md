@@ -8,15 +8,7 @@ A modern full-stack task management application demonstrating clean architecture
 
 This project follows a layered architecture:
 
-[ Next.js Frontend ]
-        ↓
-[ FastAPI API Layer (Controllers) ]
-        ↓
-[ Service Layer (Business Logic) ]
-        ↓
-[ Repository Layer (Data Access) ]
-        ↓
-[ Database (SQLite) ]
+![Architecture](./screenshots/architecture.png)
 
 ---
 
@@ -60,34 +52,13 @@ This project follows a layered architecture:
 
 ### Backend
 
-
-backend/app/
-├─ api/ # Route handlers (controllers)
-├─ services/ # Business logic
-├─ repositories/ # Data access layer
-├─ models/ # SQLAlchemy ORM models
-├─ schemas/ # Pydantic DTOs
-├─ db/ # Database setup
-└─ core/ # Config, security (JWT, hashing)
-
+![Backend](./screenshots/backend.png)
 
 ---
 
 ### Frontend
 
-
-frontend/src/
-├─ app/ # Next.js App Router pages
-│ ├─ login/
-│ ├─ register/
-│ └─ tasks/
-├─ components/ # Reusable UI components
-├─ features/
-│ ├─ auth/
-│ └─ tasks/
-├─ services/ # API client layer
-└─ hooks/ # Custom hooks (optional)
-
+![Frontend](./screenshots/frontend.png)
 
 ---
 
@@ -123,27 +94,40 @@ POST /users
   "email": "test@example.com",
   "password": "password123"
 }
+
+```
 Login
 POST /auth/login
 
-Response:
+```json
 
 {
   "access_token": "...",
   "token_type": "bearer"
 }
+
+```
 Create Task
 POST /tasks
+
 Authorization: Bearer <token>
+
+```json
 {
   "title": "New Task"
 }
+
+```
 Update Task
 PUT /tasks/{id}
+
+```json
 {
   "title": "Updated Task",
   "completed": true
 }
+
+```
 Delete Task
 DELETE /tasks/{id}
 
@@ -200,11 +184,6 @@ Complete CRUD functionality
 
 ## 3 High-Impact Optional Additions
 
-## 1. Add Screenshots (very strong signal)
-
-Example:
-
-```md
 ## UI Preview
 
 ### Login Page
@@ -213,13 +192,9 @@ Example:
 ### Tasks Page
 ![Tasks Page](./screenshots/Tasks-Page.png)
 
-## Demo
+### Demo
 
 ![Demo](./screenshots/Github-Fullstack-Demo-Gif.gif)
-
-Shows:
-
-login → create task → edit → delete
 
 ## What I Would Improve With More Time
 
