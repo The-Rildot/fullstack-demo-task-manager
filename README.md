@@ -30,7 +30,7 @@ backend/app/
 ├─ models/ # SQLAlchemy ORM models
 ├─ schemas/ # Pydantic DTOs
 ├─ db/ # Database setup
-└─ core/ # Config, security (future)
+└─ core/ # Config, security
 
 
 ---
